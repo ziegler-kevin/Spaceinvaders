@@ -1,3 +1,2 @@
 # Spaceinvaders
-# Spaceinvaders
-# spaceinvaders-pygame
+
