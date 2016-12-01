@@ -5,7 +5,7 @@ Simple Space Invaders like game
 This code is a little example for using pygame to create 2D computer games.
 It was created after watching some tutorials, I found on Youtube.
 
-Just serch for "pygame tutorial" on Youtube.
+Just search for "pygame tutorial" on Youtube.
 
 It's astounding how easy it is to create games with python and pygame.
 A programm like this you can create in less then one workday, without much
