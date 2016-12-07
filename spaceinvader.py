@@ -287,7 +287,7 @@ class Game:
             pygame.display.flip()
 
             # Score
-            fscore = round(score, 1)
+            fscore = round(score, 0)
             scoretext = font.render("Score : {0}".format(fscore), 1, (255, 255, 255))
             self.__screen.blit(zeit, (800, 10))
             self.__screen.blit(scoretext, (400, 10))
@@ -301,8 +301,8 @@ class Game:
                 sys.exit(0)
 
             # Schreiben
-            li = (fscore, score)
-            d.write(str(li[0]) + ";"+ str(score).replace(".", ",") + "\n")
+            li = (score)
+            d.write(str(score).replace(".", ",") + "\n")
 
             # Schliessen
             d.close()
