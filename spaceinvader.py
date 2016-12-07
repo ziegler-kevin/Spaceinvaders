@@ -17,8 +17,9 @@ code of an beginner and it is not more than an example for absolute beginners.
 
 # Impotrting some modules
 # Be shure to have pygame installed
-import sys, pygame
+import sys, pygame, time
 from pygame.locals import *
+
 
 
 ##################################################
@@ -28,6 +29,8 @@ from pygame.locals import *
 #                                                #
 ##################################################
 
+
+pygame.init()
 # Because we want to have several enemies,
 # it's a good idea to create an object for each
 class Enemy:
@@ -112,6 +115,21 @@ class Enemy:
 # you create a single object from.
 class Game:
     # Initalize the game
+    def score(self):
+        score = 0
+        pygame.display.flip()
+        pygame.display.update()
+
+        # Player Name
+
+    def name(self):
+        name = 'Kevin'
+        font = pygame.font.SysFont('monospace', 18)
+        text_name = font.render('Name : ' + str(name), 1, (255, 255, 255))
+
+        self.__screen.blit(text_name, (50, 10))
+        pygame.display.update()
+
     def __init__(self):
         # Initialize display
         self.__display_size = [1024, 768]
@@ -204,7 +222,6 @@ class Game:
                 # Take a screenshot with [S] key
                 elif event.key == K_s:
                     sys.exit(0)
-
     # This method updates all things that are changing automaticly
     def _update(self):
         # Move enemies
@@ -254,10 +271,47 @@ class Game:
         # Update display
         pygame.display.update()
 
+
     # Runs the game
     def run(self):
+        font = pygame.font.SysFont('monospace', 18)
+        score = 0
         # Main loop, loops as long as the game runs
         while True:
+            #vn = str(e1)
+
+            # Clock time
+            lt = time.localtime()
+            stunde, minute, sekunde = lt[3:6]
+            zeit = font.render("{0:02d}:{1:02d}:{2:02d}".format(stunde, minute, sekunde), 1, (255, 255, 255))
+            pygame.display.flip()
+
+            # Score
+            fscore = round(score, 1)
+            scoretext = font.render("Score : {0}".format(fscore), 1, (255, 255, 255))
+            self.__screen.blit(zeit, (800, 10))
+            self.__screen.blit(scoretext, (400, 10))
+            score += 0.1
+            # Zugriffsversuch Datei
+            try:
+                d = open("score_list.ods", "a")
+            except:
+                print("Dateizugriff nicht erfolgreich")
+                sys.exit(0)
+
+            # Schreiben
+            li = str(fscore)
+            d.write(str(li[0]).replace(".", ",") + "\n\n")
+
+            # Schliessen
+            d.close()
+            if score >= 100.0:
+                print("Du hast gewonnen")
+            else:
+                print("")
+
+            pygame.display.update()
+
             # The clock preventing the game from doing more
             # than 60 loops per second.
             # It regulates game speed limits CPU usage
@@ -268,7 +322,6 @@ class Game:
             self._update()
             # All chages done in one mainloop are drawen to the screen at last
             self._draw_screen()
-
 
 # Main function
 # The game starts here!
