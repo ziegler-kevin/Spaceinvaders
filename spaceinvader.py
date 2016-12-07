@@ -306,7 +306,7 @@ class Game:
 
             # Schliessen
             d.close()
-            if score >= 100.0:
+            if score >= 99.0:
                 print("Du hast gewonnen")
             else:
                 print("")
