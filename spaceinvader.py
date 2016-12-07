@@ -292,16 +292,17 @@ class Game:
             self.__screen.blit(zeit, (800, 10))
             self.__screen.blit(scoretext, (400, 10))
             score += 0.1
+
             # Zugriffsversuch Datei
             try:
-                d = open("score_list.ods", "a")
+                d = open("score_list.ods", "w")
             except:
                 print("Dateizugriff nicht erfolgreich")
                 sys.exit(0)
 
             # Schreiben
-            li = str(fscore)
-            d.write(str(li[0]).replace(".", ",") + "\n\n")
+            li = (fscore, score)
+            d.write(str(li[0]) + ";"+ str(score).replace(".", ",") + "\n")
 
             # Schliessen
             d.close()
