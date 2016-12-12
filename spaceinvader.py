@@ -21,7 +21,6 @@ import sys, pygame, time
 from pygame.locals import *
 
 
-
 ##################################################
 #                                                #
 #   Please read ahead at the end of this file,   #
@@ -125,9 +124,7 @@ class Game:
     def name(self):
         name = 'Kevin'
         font = pygame.font.SysFont('monospace', 18)
-        text_name = font.render('Name : ' + str(name), 1, (255, 255, 255))
-
-        self.__screen.blit(text_name, (50, 10))
+        #text_name = font.render('Name : ' + str(name), 1, (255, 255, 255))
         pygame.display.update()
 
     def __init__(self):
@@ -269,8 +266,7 @@ class Game:
         if (self.__pos_shot[1] > 0):
             self.__screen.blit(self.__img_shot, self.__pos_shot)
         # Update display
-        pygame.display.update()
-
+        #pygame.display.update()
 
     # Runs the game
     def run(self):
@@ -278,41 +274,6 @@ class Game:
         score = 0
         # Main loop, loops as long as the game runs
         while True:
-            #vn = str(e1)
-
-            # Clock time
-            lt = time.localtime()
-            stunde, minute, sekunde = lt[3:6]
-            zeit = font.render("{0:02d}:{1:02d}:{2:02d}".format(stunde, minute, sekunde), 1, (255, 255, 255))
-            pygame.display.flip()
-
-            # Score
-            fscore = round(score, 0)
-            scoretext = font.render("Score : {0}".format(fscore), 1, (255, 255, 255))
-            self.__screen.blit(zeit, (800, 10))
-            self.__screen.blit(scoretext, (400, 10))
-            score += 0.1
-
-            # Zugriffsversuch Datei
-            try:
-                d = open("score_list.ods", "w")
-            except:
-                print("Dateizugriff nicht erfolgreich")
-                sys.exit(0)
-
-            # Schreiben
-            li = (score)
-            d.write(str(score).replace(".", ",") + "\n")
-
-            # Schliessen
-            d.close()
-            if score >= 99.0:
-                print("Du hast gewonnen")
-            else:
-                print("")
-
-            pygame.display.update()
-
             # The clock preventing the game from doing more
             # than 60 loops per second.
             # It regulates game speed limits CPU usage
@@ -323,6 +284,35 @@ class Game:
             self._update()
             # All chages done in one mainloop are drawen to the screen at last
             self._draw_screen()
+
+            name = 'Kevin'
+
+            # Name
+            text_name = font.render("Name : {0}".format(str(name)), 1, (255, 255, 255))
+
+            # Score
+            fscore = round(score, 0)
+            scoretext = font.render("Score : {0}".format(fscore), 1, (255, 255, 255))
+            score += 0.1
+
+            # Clock time
+            lt = time.localtime()
+            stunde, minute, sekunde = lt[3:6]
+            zeit = font.render("{0:02d}:{1:02d}:{2:02d}".format(stunde, minute, sekunde), 1, (255, 255, 255))
+            pygame.display.flip()
+
+            self.__screen.blit(text_name, (50, 10))
+            self.__screen.blit(scoretext, (400, 10))
+            self.__screen.blit(zeit, (800, 10))
+            # Zugriffsversuch Datei
+            try:
+                d = open("score_list.ods", "w")
+            except:
+                print("Dateizugriff nicht erfolgreich")
+                sys.exit(0)
+
+            pygame.display.update()
+
 
 # Main function
 # The game starts here!
