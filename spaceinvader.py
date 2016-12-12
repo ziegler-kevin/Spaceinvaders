@@ -348,7 +348,7 @@ while True:
                         self.__clock.tick(60)
                         # The event loop processes events (user input)
                         self._event_loop()
-                        # The update function for everything that moves automaticly.
+                        # The update function for everything that moves automaticly
                         self._update()
                         # All chages done in one mainloop are drawen to the screen at last
                         self._draw_screen()
