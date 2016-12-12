@@ -114,10 +114,20 @@ while True:
 
                 # This method is called to verify and perform a hit by players shot
                 def hit(self):
+                    x = 0
                     # Only vital enemies can be hit
                     if self.__state == 0:
                         # Set state to first step of the explosion
                         self.__state = 1
+                        if self.__state == 1:
+                            x += 1
+                            a = x + 14
+                            b = a + a
+                            print(a)
+                        name = e1.get()
+                        f = open("score_list.ods", "a")
+                        f.writelines("Name : " + name + "\t" "Score : " + str(b) + "\n")
+                        f.close()
                         # Confirm hit
                         return True
                     else:
@@ -348,12 +358,7 @@ while True:
                         # Name
                         text_name = font.render("Name : {0}".format(str(name)), 1, (255, 255, 255))
 
-                        # Score
-                        fscore = round(score, 0)
-                        scoretext = font.render("Score : {0}".format(str(fscore)), 1, (255, 255, 255))
-                        score += 0.1
-
-                        # Clock time
+                        # time
                         lt = time.localtime()
                         stunde, minute, sekunde = lt[3:6]
                         zeit = font.render("{0:02d}:{1:02d}:{2:02d}".format(stunde, minute, sekunde), 1,
@@ -361,12 +366,7 @@ while True:
                         pygame.display.flip()
 
                         self.__screen.blit(text_name, (50, 10))
-                        self.__screen.blit(scoretext, (400, 10))
                         self.__screen.blit(zeit, (800, 10))
-
-                        f = open("score_list.ods", "a")
-                        f.writelines("Name : " + name + "\t" + "Score : " + str(fscore) + "\n")
-                        f.close()
 
                         pygame.display.update()
 
