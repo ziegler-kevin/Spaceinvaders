@@ -383,7 +383,7 @@ while True:
             if __name__ == "__main__":
                 # Initalice the game instance
                 app = Game()
-                # Run the game
+                # Run the game.
                 app.run()
 
     else:
