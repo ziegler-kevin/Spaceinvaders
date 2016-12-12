@@ -1,2 +1,2 @@
 # spaceinvaders
-A Spaceinvaders game in Python
+A Spaceinvaders game in Python --
