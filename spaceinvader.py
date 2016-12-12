@@ -124,9 +124,10 @@ while True:
                             a = x + 14
                             b = a + a
                             print(a)
+
                         name = e1.get()
                         f = open("score_list.ods", "a")
-                        f.writelines("Name : " + name + "\t" "Score : " + str(b) + "\n")
+                        f.writelines("Name : " + name + "\t" "Score : " + str(a) + "\n")
                         f.close()
                         # Confirm hit
                         return True
@@ -339,8 +340,8 @@ while True:
 
                 # Runs the game
                 def run(self):
-                    font = pygame.font.SysFont('monospace', 18)
                     score = 0
+                    font = pygame.font.SysFont('monospace', 18)
                     # Main loop, loops as long as the game runs
                     while True:
                         # The clock preventing the game from doing more
@@ -358,6 +359,11 @@ while True:
                         # Name
                         text_name = font.render("Name : {0}".format(str(name)), 1, (255, 255, 255))
 
+                        # Score
+                        fscore = round(score, 1)
+                        score_text = font.render("Score : {0}".format(str(fscore)), 1, (255, 255, 255))
+                        score += 1
+
                         # time
                         lt = time.localtime()
                         stunde, minute, sekunde = lt[3:6]
@@ -366,6 +372,7 @@ while True:
                         pygame.display.flip()
 
                         self.__screen.blit(text_name, (50, 10))
+                        self.__screen.blit(score_text, (400, 10))
                         self.__screen.blit(zeit, (800, 10))
 
                         pygame.display.update()
