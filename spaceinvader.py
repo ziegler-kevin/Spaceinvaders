@@ -34,7 +34,6 @@ from tkinter import *
 pygame.init()
 clock = pygame.time.Clock()
 
-
 class Option:
     hovered = False
 
@@ -77,17 +76,14 @@ while True:
         if option.rect.collidepoint(pygame.mouse.get_pos()):
             option.hovered = True
 
-
             def show_entry_fields():
                 print("Name: %s " % (e1.get()))
                # e1.delete(0, END)
-
 
             master = Tk()
             Label(master, text="Name").grid(row=0)
 
             e1 = Entry(master)
-
 
             e1.grid(row=0, column=1)
 
@@ -95,7 +91,6 @@ while True:
             Button(master, text='Name speichern', command=show_entry_fields).grid(row=2, column=1, sticky=W, pady=4)
             Button(master, text='Beenden', command=quit).grid(row=3, column=3, sticky=W, pady=4)
             mainloop()
-
 
             # Because we want to have several enemies,
             # it's a good idea to create an object for each
@@ -182,16 +177,12 @@ while True:
             class Game:
                 # Initalize the game
                 def score(self):
-                    score = 0
                     pygame.display.flip()
                     pygame.display.update()
 
                     # Player Name
 
                 def name(self):
-                    name = 'Kevin'
-                    font = pygame.font.SysFont('monospace', 18)
-                    # text_name = font.render('Name : ' + str(name), 1, (255, 255, 255))
                     pygame.display.update()
 
                 def __init__(self):
@@ -353,14 +344,13 @@ while True:
                         # All chages done in one mainloop are drawen to the screen at last
                         self._draw_screen()
 
-                        name = ''
-
+                        name = e1.get()
                         # Name
                         text_name = font.render("Name : {0}".format(str(name)), 1, (255, 255, 255))
 
                         # Score
                         fscore = round(score, 0)
-                        scoretext = font.render("Score : {0}".format(fscore), 1, (255, 255, 255))
+                        scoretext = font.render("Score : {0}".format(str(fscore)), 1, (255, 255, 255))
                         score += 0.1
 
                         # Clock time
@@ -373,12 +363,10 @@ while True:
                         self.__screen.blit(text_name, (50, 10))
                         self.__screen.blit(scoretext, (400, 10))
                         self.__screen.blit(zeit, (800, 10))
-                        # Zugriffsversuch Datei
-                        try:
-                            d = open("score_list.ods", "w")
-                        except:
-                            print("Dateizugriff nicht erfolgreich")
-                            sys.exit(0)
+
+                        f = open("score_list.ods", "a")
+                        f.writelines("Name : " + name + "\t" + "Score : " + str(fscore) + "\n")
+                        f.close()
 
                         pygame.display.update()
 
