@@ -394,25 +394,8 @@ while True:
     for option in option2:
         if option.rect.collidepoint(pygame.mouse.get_pos()):
             option.hovered = True
-            try:
-                d = open("score_list.ods")
-            except:
-                print("Dateizugriff nicht erfolgreich")
-                sys.exit(0)
-            gesamttext = d.read()
-            d.close()
-
-            zeilenliste = gesamttext.split(chr(10))
-
-            li = []
-            for zeile in zeilenliste:
-                if zeile:
-                    zwliste = zeile.split(";")
-                    li.append([int(zwliste[0]),
-                               zwliste[1],
-                               float(zwliste[2].replace(",", "."))])
-            for p in li:
-                print("{:d} {1} {2:.2f}".format(p[0], p[1], p[2]))
+            d = open("score_list.ods","r")
+            print(d.read(700))
 
         else:
             option.hovered = False
